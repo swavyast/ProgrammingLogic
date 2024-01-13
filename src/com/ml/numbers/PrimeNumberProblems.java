@@ -1,4 +1,4 @@
-package com.ml.primeNumbers;
+package com.ml.numbers;
 
 public class PrimeNumberProblems {
 	
