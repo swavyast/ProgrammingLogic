@@ -5,21 +5,15 @@ public class MergeAndSortArrays {
 	public static void main(String[] args) {
 		int a[] = { 3, 2, 1 };
 		int b[] = { 4, 6, 5 };
-		int res[] = MergeAndSortArrays.mergeArrays(a, b);
+		int res[] = mergeArrays(a, b);
 		for (int i : res)
 			System.out.print(i + "  ");
 		System.out.println("\n\n");
-		System.out.println(res.length);
 		int sortedRes[] = MergeAndSortArrays.sortArray(res);
 		for (int i : sortedRes)
 			System.out.print(i + "  ");
-
-		System.out.println("\n" + res[5]);
-		/*
-		 * System.out.println(); int res3[] =
-		 * MergeAndSortArrays.sortArrayUsingWhileLoop(res); for(int i : res3)
-		 * System.out.print(i+"  ");
-		 */
+		int index = getIndex(sortArray(mergeArrays(a, b)), 1);
+		System.out.println("\n\n"+index);
 	}
 
 	private static int[] mergeArrays(int a[], int b[]) {
@@ -33,10 +27,10 @@ public class MergeAndSortArrays {
 		return merged;
 	}
 
-	private static int getIndex(int a, int b[]) {
+	private static int getIndex(int a[], int b) {
 		int index = 0;
-		for (int i = 0; i < b.length; i++) {
-			if (b[i] == a)
+		for (int i = 0; i < a.length; i++) {
+			if (a[i] == b)
 				index = i;
 		}
 
@@ -44,31 +38,16 @@ public class MergeAndSortArrays {
 	}
 
 	public static int[] sortArray(int x[]) {
-		int sorted[] = new int[x.length];
-		int smallest = 0;
-		for (int i = 0; i < x.length; i++) {
-			for (int j = 0; j < sorted.length; j++) {
-				for (int k = j + 1; k < sorted.length; k++) {
-					if (sorted[j] > sorted[k]) {
-						int temp1 = sorted[j];
-						sorted[j] = sorted[k];
-						sorted[k] = temp1;
-					}
+		for(int i = 0; i<x.length; i++) {
+			for(int j=i+1; j<x.length; j++) {
+				if(x[i]>x[j]) {
+					int temp = x[i];
+					x[i] = x[j];
+					x[j] = temp;
 				}
 			}
-			if (i == 0) {
-				smallest = x[i];
-				sorted[i] = smallest;
-			}
-			if (x[i] < smallest) {
-				int index = getIndex(smallest, sorted);
-				int temp = smallest;
-				smallest = x[i];
-				sorted[index] = x[i];
-				sorted[i] = temp;
-			}
 		}
-		return sorted;
+		return x;
 	}
 
 }
