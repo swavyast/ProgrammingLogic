@@ -3,7 +3,6 @@ package com.ml.workingwithapis;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
-import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpClient.Redirect;
 import java.net.http.HttpClient.Version;
@@ -13,13 +12,11 @@ import java.net.http.HttpResponse.BodyHandlers;
 import java.time.Duration;
 import java.util.Properties;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 public class WorkingWithWeatherAPI {
     private static final String CONFIG_FILE = "system.properties";
     private static final String API_KEY_PROPERTY = "weatherApiKey";
     public static String getWeatherApiKey() {
+    	//try-with-resource example
         try (InputStream input = WorkingWithWeatherAPI.class.getClassLoader().getResourceAsStream(CONFIG_FILE)) {
             Properties prop = new Properties();
             prop.load(input);
